@@ -1,0 +1,29 @@
+<h1>Welcome to <%=@blogger.name%>'s Page</h1>
+
+<p>Bio: <%=@blogger.bio%></p>
+
+<p>Age: <%=@blogger.age%>
+
+<h2>Featured Post</h2>
+
+<%likes =  @blogger.posts.max_by{|p| p.likes }%>
+<%= link_to likes.title, post_path(likes.id)%>
+
+<h1>Posts</h1>
+
+<ul>
+    <%likes = 0%>
+    <%@blogger.posts.each do |post|%>
+        <li><%= link_to post.title, post_path(post)%></li>
+        <%likes += post.likes%>
+    <%end%>
+</ul>
+
+<h1>Total Likes</h1>
+<p>Count: <%=likes%></p>
+
+    
+
+<p><%= link_to "Edit #{@blogger.name}", edit_blogger_path(@blogger)%></p>
+
+<%= button_to "Delete #{@blogger.name}", @blogger, :method => :delete%>
